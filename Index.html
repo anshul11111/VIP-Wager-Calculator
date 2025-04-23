@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stake VIP Wager Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-default">
+    <!-- Animated background -->
+    <div class="bg-animation" id="bg-animation"></div>
+
+    <div class="container">
+        <div class="card">
+            <h1>Stake VIP Wager Calculator</h1>
+            <p class="subtitle">Calculate how much more you need to wager to reach the next VIP level</p>
+            
+            <div class="form-group">
+                <label for="current-rank">Current VIP Rank</label>
+                <select id="current-rank">
+                    <option value="none">No Rank Yet</option>
+                    <option value="Bronze">Bronze</option>
+                    <option value="Silver">Silver</option>
+                    <option value="Gold">Gold</option>
+                    <option value="Platinum">Platinum</option>
+                    <option value="Platinum II">Platinum II</option>
+                    <option value="Platinum III">Platinum III</option>
+                    <option value="Platinum IV">Platinum IV</option>
+                    <option value="Platinum V">Platinum V</option>
+                    <option value="Platinum VI">Platinum VI</option>
+                    <option value="Diamond">Diamond</option>
+                    <option value="Diamond II">Diamond II</option>
+                    <option value="Diamond III">Diamond III</option>
+                    <option value="Diamond IV">Diamond IV</option>
+                    <option value="Diamond V">Diamond V</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="current-progress">Current Progress to Next Rank (in %)</label>
+                <input type="number" id="current-progress" placeholder="Enter percentage (0-99)" min="0" max="99" value="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="current-wager">Current Wager Amount ($)</label>
+                <input type="number" id="current-wager" placeholder="Optional - Only if you know your exact wager amount">
+            </div>
+            
+            <button class="button" id="calculate-btn">Calculate</button>
+            
+            <div class="result" id="result">
+                <h3 class="result-title">Your VIP Progress</h3>
+                
+                <div class="result-info">
+                    <div>
+                        <div class="info-label">Current Rank</div>
+                        <div class="info-value"><span id="result-current-rank">Bronze</span></div>
+                    </div>
+                    <div>
+                        <div class="info-label">Next Rank</div>
+                        <div class="info-value"><span id="result-next-rank">Silver</span></div>
+                    </div>
+                </div>
+                
+                <div class="result-info">
+                    <div>
+                        <div class="info-label">Required Wager for Next Rank</div>
+                        <div class="info-value">$<span id="result-required">50,000</span></div>
+                    </div>
+                    <div>
+                        <div class="info-label">Current Progress</div>
+                        <div class="info-value"><span id="result-progress">25</span>%</div>
+                    </div>
+                </div>
+                
+                <div class="result-info">
+                    <div>
+                        <div class="info-label">Estimated Current Wager</div>
+                        <div class="info-value">$<span id="result-current">12,500</span></div>
+                    </div>
+                    <div>
+                        <div class="info-label">Remaining Wager Needed</div>
+                        <div class="info-value">$<span id="result-remaining">37,500</span></div>
+                    </div>
+                </div>
+                
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span>0%</span>
+                    <span>100%</span>
+                </div>
+            </div>
+
+            <button class="button secondary-btn" id="toggle-ranks">Show VIP Rank Requirements</button>
+
+            <div class="vip-ranks hide" id="vip-ranks">
+                <table class="vip-table">
+                    <thead>
+                        <tr>
+                            <th>VIP Rank</th>
+                            <th>Required Wager ($)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Bronze</td>
+                            <td>$10,000</td>
+                        </tr>
+                        <tr>
+                            <td>Silver</td>
+                            <td>$50,000</td>
+                        </tr>
+                        <tr>
+                            <td>Gold</td>
+                            <td>$100,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum</td>
+                            <td>$250,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum II</td>
+                            <td>$500,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum III</td>
+                            <td>$1,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum IV</td>
+                            <td>$2,500,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum V</td>
+                            <td>$5,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Platinum VI</td>
+                            <td>$10,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Diamond</td>
+                            <td>$25,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Diamond II</td>
+                            <td>$50,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Diamond III</td>
+                            <td>$100,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Diamond IV</td>
+                            <td>$250,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Diamond V</td>
+                            <td>$500,000,000</td>
+                        </tr>
+                        <tr>
+                            <td>Obsidian</td>
+                            <td>$1,000,000,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>© 2025 Stake VIP Wager Calculator | Not officially affiliated with Stake</p>
+        </div>
+    </div>
+
+    <script>
+        // VIP ranks and their required wager amounts
+        const vipRanks = {
+            "none": 0,
+            "Bronze": 10000,
+            "Silver": 50000,
+            "Gold": 100000,
+            "Platinum": 250000,
+            "Platinum II": 500000,
+            "Platinum III": 1000000,
+            "Platinum IV": 2500000,
+            "Platinum V": 5000000,
+            "Platinum VI": 10000000,
+            "Diamond": 25000000,
+            "Diamond II": 50000000,
+            "Diamond III": 100000000,
+            "Diamond IV": 250000000,
+            "Diamond V": 500000000,
+            "Obsidian": 1000000000
+        };
+        
+        // Rank theme colors - coffee/dark theme
+        const rankThemes = {
+            "none": {
+                main: "#1a1a1a",
+                accent: "#3c2f2f"
+            },
+            "Bronze": {
+                main: "#2d1e12",
+                accent: "#6e4423"
+            },
+            "Silver": {
+                main: "#2b2b2b",
+                accent: "#717171"
+            },
+            "Gold": {
+                main: "#2a2010",
+                accent: "#a17d1a"
+            },
+            "Platinum": {
+                main: "#1f2426",
+                accent: "#718a94"
+            },
+            "Platinum II": {
+                main: "#1f2426",
+                accent: "#718a94"
+            },
+            "Platinum III": {
+                main: "#1e2325",
+                accent: "#718a94"
+            },
+            "Platinum IV": {
+                main: "#1d2224",
+                accent: "#718a94"
+            },
+            "Platinum V": {
+                main: "#1c2123",
+                accent: "#718a94"
+            },
+            "Platinum VI": {
+                main: "#1b2022",
+                accent: "#718a94"
+            },
+            "Diamond": {
+                main: "#1a2633",
+                accent: "#4a8db7"
+            },
+            "Diamond II": {
+                main: "#19242f",
+                accent: "#4a8db7"
+            },
+            "Diamond III": {
+                main: "#18222d",
+                accent: "#4a8db7"
+            },
+            "Diamond IV": {
+                main: "#17202a",
+                accent: "#4a8db7"
+            },
+            "Diamond V": {
+                main: "#162028",
+                accent: "#4a8db7"
+            },
+            "Obsidian": {
+                main: "#0a0a0a",
+                accent: "#333333"
+            }
+        };
+        
+        // Get next rank name
+        function getNextRank(currentRank) {
+            const ranks = Object.keys(vipRanks);
+            const currentIndex = ranks.indexOf(currentRank);
+            
+            if (currentIndex === ranks.length - 1) {
+                return "Max Rank Achieved";
+            }
+            
+            return ranks[currentIndex + 1];
+        }
+        
+        // Format number with commas
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+        
+        // Apply theme based on rank
+        function applyTheme(rankName) {
+            const theme = rankThemes[rankName] || rankThemes.none;
+            document.body.style.setProperty('--theme-bg', theme.main);
+            document.body.style.setProperty('--theme-accent', theme.accent);
+            
+            // Transition effect
+            document.body.classList.add('theme-transition');
+            setTimeout(() => {
+                document.body.classList.remove('theme-transition');
+            }, 1000);
+        }
+        
+        // Calculate wager needed
+        function calculateWager() {
+            const currentRank = document.getElementById('current-rank').value;
+            const currentProgress = parseFloat(document.getElementById('current-progress').value) || 0;
+            const currentWagerInput = document.getElementById('current-wager').value;
+            
+            // Apply theme based on rank
+            applyTheme(currentRank);
+            
+            // Validation
+            if (currentProgress < 0 || currentProgress >= 100) {
+                alert("Progress must be between 0 and 99%");
+                return;
+            }
+            
+            const nextRank = getNextRank(currentRank);
+            
+            // If max rank achieved
+            if (nextRank === "Max Rank Achieved") {
+                document.getElementById('result-current-rank').textContent = currentRank;
+                document.getElementById('result-next-rank').textContent = "Max Rank Achieved";
+                document.getElementById('result-required').textContent = "N/A";
+                document.getElementById('result-progress').textContent = "100";
+                document.getElementById('result-current').textContent = formatNumber(vipRanks[currentRank]);
+                document.getElementById('result-remaining').textContent = "0";
+                document.getElementById('progress-fill').style.width = "100%";
+                document.getElementById('result').style.display = "block";
+                return;
+            }
+            
+            const currentRankWager = vipRanks[currentRank];
+            const nextRankWager = vipRanks[nextRank];
+            const wagerDifference = nextRankWager - currentRankWager;
+            
+            let estimatedCurrentWager;
+            if (currentWagerInput && !isNaN(currentWagerInput)) {
+                estimatedCurrentWager = parseFloat(currentWagerInput);
+            } else {
+                estimatedCurrentWager = currentRankWager + (wagerDifference * (currentProgress / 100));
+            }
+            
+            const remainingWager = nextRankWager - estimatedCurrentWager;
+
+            // Calculate actual progress if current wager is provided
+            let calculatedProgress = currentProgress;
+            if (currentWagerInput && !isNaN(currentWagerInput)) {
+                const progress = ((estimatedCurrentWager - currentRankWager) / wagerDifference) * 100;
+                calculatedProgress = Math.min(Math.max(progress, 0), 99.99); // Clamp between 0 and 99.99
+            }
+            
+            // Update result display
+            document.getElementById('result-current-rank').textContent = currentRank === "none" ? "No Rank" : currentRank;
+            document.getElementById('result-next-rank').textContent = nextRank;
+            document.getElementById('result-required').textContent = formatNumber(nextRankWager);
+            document.getElementById('result-progress').textContent = calculatedProgress.toFixed(2);
+            document.getElementById('result-current').textContent = formatNumber(Math.floor(estimatedCurrentWager));
+            document.getElementById('result-remaining').textContent = formatNumber(Math.ceil(Math.max(0, remainingWager)));
+            document.getElementById('progress-fill').style.width = calculatedProgress + "%";
+            
+            // Show result
+            document.getElementById('result').style.display = "block";
+            
+            // Scroll to result
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Create animated background
+        function createAnimatedBackground() {
+            const bgAnimation = document.getElementById('bg-animation');
+            const count = 20;
+            
+            for (let i = 0; i < count; i++) {
+                const size = Math.random() * 80 + 20;
+                const span = document.createElement('span');
+                
+                span.style.width = size + 'px';
+                span.style.height = size + 'px';
+                span.style.left = Math.random() * 100 + '%';
+                span.style.top = Math.random() * 100 + '%';
+                span.style.animationDelay = Math.random() * 5 + 's';
+                span.style.animationDuration = Math.random() * 10 + 15 + 's';
+                
+                bgAnimation.appendChild(span);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createAnimatedBackground();
+            
+            // Add event listener to calculate button
+            document.getElementById('calculate-btn').addEventListener('click', calculateWager);
+            
+            // Add event listener to toggle ranks button
+            document.getElementById('toggle-ranks').addEventListener('click', function() {
+                const vipRanks = document.getElementById('vip-ranks');
+                const toggleBtn = document.getElementById('toggle-ranks');
+                
+                if (vipRanks.classList.contains('hide')) {
+                    vipRanks.classList.remove('hide');
+                    toggleBtn.textContent = 'Hide VIP Rank Requirements';
+                } else {
+                    vipRanks.classList.add('hide');
+                    toggleBtn.textContent = 'Show VIP Rank Requirements';
+                }
+            });
+            
+            // Add input validation
+            document.getElementById('current-progress').addEventListener('input', function() {
+                if (this.value > 99) this.value = 99;
+                if (this.value < 0) this.value = 0;
+            });
+            
+            // Add event listener for rank selection to update theme
+            document.getElementById('current-rank').addEventListener('change', function() {
+                applyTheme(this.value);
+            });
+            
+            // Set initial theme
+            applyTheme('none');
+        });
+    </script>
+</body>
+</html>
