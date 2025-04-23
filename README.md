@@ -44,26 +44,6 @@ The calculator includes data for all Stake VIP ranks:
 | Diamond V   | $500,000,000      |
 | Obsidian    | $1,000,000,000    |
 
-## Installation and Deployment
-
-### Option 1: Netlify Deployment (Recommended)
-
-1. Sign up for a [Netlify](https://www.netlify.com/) account if you don't have one
-2. From the Netlify dashboard, click "New site from Git" or use the drag-and-drop area
-3. Drag and drop the project folder or the HTML file directly onto the deployment area
-4. Your site will be automatically deployed and assigned a Netlify subdomain
-5. (Optional) Configure a custom domain through the Netlify settings
-
-### Option 2: Manual Hosting
-
-1. Download the HTML file to your computer
-2. Upload the file to any web hosting service that supports static websites
-3. Ensure the file is named `index.html` or configure your server to serve it as the default page
-
-### Option 3: Local Usage
-
-1. Download the HTML file to your computer
-2. Open the file directly in any modern web browser
 
 ## Technical Details
 
